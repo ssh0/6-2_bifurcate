@@ -1,4 +1,4 @@
-6-2_bifuracate
+6-2_bifurcate
 ==============
 
 numerical simulation with python
