@@ -1,0 +1,80 @@
+\documentclass{jsarticle}
+\usepackage{moreverb}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+
+\title{計算機実習 問題6.2-ロジスティック写像の定性的な特徴}
+\author{早稲田大学先進理工学部物理学科 B4 藤本將太郎}
+\date{2014/04/28}
+
+\begin{document}
+
+\maketitle
+
+\section{シミュレーションの目的}
+ロジスティック写像
+\begin{eqnarray}
+ x_{n+1}=f(x_{n})=4rx_{n}(1-x_{n})
+\label{eq:logistic}
+\end{eqnarray}
+の振る舞いを調べる方法の一つとして、$x$の値を$r$の関数としてプロットする方法がある。初期の過渡的な振る舞いを捨てて、その後の反復で得られる$x$の値をプロットするのである。本シミュレーションでは、式(\ref{eq:logistic})を差分方程式として解き、上に述べたような条件を満たすようなプログラムを作成し、実際にシミュレーションを行うことである。
+
+\section{作成したプログラム}
+Pythonを用いて作成したプログラムを以下に示す。
+
+\listinginput{1}{_6-2_bifurcate.py}
+
+このプログラムは、追加のモジュールとして、matplotlibを使用している。プログラムを実行すると各パラメータ\{x0, ntransient, nplot, r0, dr\}(x0: xの初期値$x_{0}$、ntransient: プロットしないnの範囲、nplot: プロットするnの大きさ、r0: 制御パラメータ$r$の初期値, dr: プロットする$r$の刻み幅 )の設定ダイアログが開き、値を設定してOKボタンを押すことで、その値で計算されたロジスティック写像の分岐図が描画される。はじめのntransient回は、計算はするがプロットはされず、次のnplot回は赤でプロットし、その後のnplot回は青でプロットする。
+
+\section{実習課題}
+
+\begin{enumerate}
+ \renewcommand{\labelenumi}{\alph{enumi}.}
+ \renewcommand{\labelenumii}{}
+
+ \item 作成したプログラムを使って、周期2、4、8の振る舞いを確かめよ。何回の周期の倍化を見ることができるだろうか。
+ 
+  \begin{enumerate}
+   \item 初期値として、表\ref{tab:t1}に示した値を代入してプログラムを実行した結果を図\ref{fig:f1}に示す。このグラフから、$r=0.75$で周期が2になり、$r=0.86$のあたりで周期が4となり、また$r=0.89$のあたりで周期が8となっていく様子を見ることができる。また、それ以降は判別が難しくなり、カオス的な振る舞いとなった。しかし、ところどころには周期的振る舞いを示す領域も存在していることも見て取れる。
+   
+   \begin{table}[htbp]
+   \begin{center}
+     \caption{使用した各種パラメータの値}
+     \begin{tabular}{c|c} \hline
+      パラメータ & 値  \\ \hline
+      x0 & 0.3 \\
+      ntransient & 1000 \\
+      nplot & 50 \\
+      r0 & 0.7 \\
+      dr & 0.0005 \\
+      \hline
+     \end{tabular}
+     \label{tab:t1}
+   \end{center}
+   \end{table}
+
+   \begin{figure}[H]
+    \begin{center}
+    \includegraphics[width=17.0cm]{figure_1.pdf}
+    \caption{表\ref{tab:t1}で定めたパラメータでのグラフ}
+    \label{fig:f1}
+    \end{center}
+    \end{figure}
+   \end{enumerate}
+
+\item 作成したプログラムを使って、周期2、4、8の振る舞いを確かめよ。何回の周期の倍化を見ることができるだろうか。
+ 
+  \begin{enumerate}
+   \item
+  \end{enumerate}
+\end{enumerate}
+
+\section{まとめ}
+ロジスティック写像の定性的な特徴を、Bifurcation-Diaglamを作成することにより確認することができた。
+
+\section{参考文献}
+\begin{itemize}
+ \item ハーベイ・ゴールド,ジャン・トボチニク,石川正勝・宮島佐介訳『計算物理学入門』,ピアソン・エデュケーション, 2000.
+\end{itemize}
+
+\end{document}
